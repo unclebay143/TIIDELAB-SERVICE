@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript with Mr. Kenny</title>
+</head>
+<body>
+  <script>
+
+    // >>>>> First Exercise <<<<<
+    var value = prompt("For Exercise-1 Enter Value: ");
+    alert("Your Value is " + typeof(value))
+    var valueToNumber = parseInt(value)
+    alert("Your Value is now a " + typeof(valueToNumber))
+
+    // >>>>> Second Exercise <<<<<
+    // >>>>> This checks if the value is greater than 100 or not <<<<<
+    var value2 = prompt("For Exercise-2 Enter Value2: ");
+    var value2ToNumber = parseInt(value2)
+    if (value2ToNumber >= 100 )
+    {
+      alert("Century or Above Century")
+    }
+
+    // >>>>> Third Exercise <<<<<
+    // >>>>> This should show the value if not null or undefined <<<<<
+
+    var value3 = prompt("For Exercise-3 Enter Value2: ");
+    if (value3 != null  || value3 != undefined )
+    {
+      alert("This is your Entered Value: " + value3)
+    }
+
+  </script>
+</body>
+</html>
