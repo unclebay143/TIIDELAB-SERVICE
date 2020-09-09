@@ -3,35 +3,347 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JavaScript with Mr. Kenny</title>
+  <title>Document</title>
 </head>
 <body>
   <script>
-
-    // >>>>> First Exercise <<<<<
-    var value = prompt("For Exercise-1 Enter Value: ");
-    alert("Your Value is " + typeof(value))
-    var valueToNumber = parseInt(value)
-    alert("Your Value is now a " + typeof(valueToNumber))
-
-    // >>>>> Second Exercise <<<<<
-    // >>>>> This checks if the value is greater than 100 or not <<<<<
-    var value2 = prompt("For Exercise-2 Enter Value2: ");
-    var value2ToNumber = parseInt(value2)
-    if (value2ToNumber >= 100 )
+    function tiidelabService()
     {
-      alert("Century or Above Century")
-    }
+      // Function for Main Menu
+      function customerService(_block)
+      {
+        var customer_input = Number(prompt(`Welcome To TIIDELab Service \n
+        1. Airtime - Self \n
+        2. Airtime - Other \n
+        3. Data \n 
+        4. Transfer `), _block);
+        if (customer_input == 1)
+        {
+          airtimeSelf()
+        }else if(customer_input == 2)
+        {
+          airtimeOther()
+        }else if(customer_input == 3)
+        {
+          dataService()
+        }else if(customer_input == 4)
+        {
+          transferService()
+        }else{
+          prompt("Invalid Response")
+        }
+      }
 
-    // >>>>> Third Exercise <<<<<
-    // >>>>> This should show the value if not null or undefined <<<<<
+      // Processing Function
+      function tranzactProcessor(amount, where, type){
+        var response = `Transaction Successful, Details Below \n\n` + "Type: " + type + "\nTransfer of: # " + amount + "\nRecipient: " + where
+        menu = confirm(response + "\n\n\ Proceed to Main menu?")
+        if(menu == true)
+        {
+          tiidelabService()
+        }else{
+          exit()
+        }
+      }
+      // ^^^^^^^ Airtime To Registered Self Number ^^^^^^^
+      function airtimeSelf()
+      {
+        const registeredSelf_number = " MTN - 08036157444 ";
+        const pin = 0000;
+        const tranzaction_type = "Self"
+        var amountToSelf = prompt("Your Number is " + registeredSelf_number + ". \n\n Enter Amount")
+        if (amountToSelf < 100)
+        {
+          alert("Minimum Recharge is #100")
+          airtimeSelf()
+        }else{
+          let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
+        if (authenticate != pin)
+        {
+          prompt("Invalid Pin")
+          tiidelabService()
+        }        
+        let confirm_amountToSelf = confirm(
+          "Confirm the Transaction below: \n" + 
+          "Transfer #" + amountToSelf + "\nTo " + 
+          registeredSelf_number
+          )
+          if (confirm_amountToSelf == true)
+          {
+            tranzactProcessor(amountToSelf, registeredSelf_number, tranzaction_type)
+          }
+          if (amountToSelf != confirm_amountToSelf)
+          {
+            prompt("Invalid Response!!!")
+            tiidelabService()
+          }
+        }
+        
+        
+      }
+     
+      // ^^^^^^^ Airtime To Other ^^^^^^^
+      function airtimeOther(){
+        let airtimeToOtherResponse = prompt(`Choose Network \n
+        1. MTN \n
+        2. Glo \n
+        3. Airtel \n
+        4. Etisalat`);
 
-    var value3 = prompt("For Exercise-3 Enter Value2: ");
-    if (value3 != null  || value3 != undefined )
-    {
-      alert("This is your Entered Value: " + value3)
-    }
+        // OPERATOR OPTION
+        // MTN OPTION
+        if (airtimeToOtherResponse == 1){
+          const tranzaction_type_other = "Airtime - Other"
+          operator_MTN = "MTN"
+          var mtn_thirdParty_number = prompt( operator_MTN + " - Enter Recipient Number (12 digits): ");
+          if (mtn_thirdParty_number.length != 12){
+            alert(`Invalid Number Format \n 1. Number must be 12 digits \n\n Okay to return to Main Menu`)
+            airtimeOther()
+          }else{
+            var mtn_amountTo_thirdParty = Number(prompt("Enter Amount: "))
+            if( mtn_amountTo_thirdParty < 100){
+              alert("Minimum Recharge to third party is #100")
+              airtimeOther()
+            }
+            // var confirm_thirdParty_number = confirm(thirdParty_number + "")
+            let confirm_mtn_thirdParty_Tranzaction = confirm(
+          "Confirm the Transaction below: \n" + 
+          "Transfer #" + mtn_amountTo_thirdParty + "\nTo " + 
+          mtn_thirdParty_number
+          )
+          if (confirm_mtn_thirdParty_Tranzaction == true)
+          {
+            tranzactProcessor(mtn_amountTo_thirdParty, mtn_thirdParty_number, tranzaction_type_other)
+          }
+          if (mtn_mountTo_thirdParty != mtn_confirm_thirdParty_Tranzaction)
+          {
+            prompt("Invalid Response!!!")
+            tiidelabService()
+          } 
+          }
+        // GLO Option
+        }else if (airtimeToOtherResponse == 2){
+          const tranzaction_type_other = "Airtime - Other"
+          operator_GLO = "GLO"
+          var glo_thirdParty_number = prompt(operator_GLO + " - Enter Recipient Number (12 digits): ");
+          if (glo_thirdParty_number.length != 12){
+            alert(`Invalid Number Format \n 1. Number must be 12 digits \n\n Okay to return to Main Menu`);
+            airtimeOther()
+          }else{
+            var mtn_amountTo_thirdParty = Number(prompt("Enter Amount: "));
+            if( mtn_amountTo_thirdParty < 100){
+              alert("Minimum Recharge to third party is #100")
+              airtimeOther();
+            }
+            // var confirm_thirdParty_number = confirm(thirdParty_number + "")
+            let confirm_mtn_thirdParty_Tranzaction = confirm(
+            "Confirm the Transaction below: \n" + 
+            "Transfer #" + mtn_amountTo_thirdParty + "\nTo " + 
+            glo_thirdParty_number
+            )
+           if (confirm_mtn_thirdParty_Tranzaction == true)
+            {
+              tranzactProcessor(mtn_amountTo_thirdParty, glo_thirdParty_number, tranzaction_type_other)
+            }
+            if (mtn_mountTo_thirdParty != mtn_confirm_thirdParty_Tranzaction)
+            {
+              prompt("Invalid Response!!!")
+              tiidelabService();
+            } 
+         }
+        //  AIRTEL OPTION
+        }else if (airtimeToOtherResponse == 3){
+          const tranzaction_type_other = "Airtime - Other"
+          operator_AIRTEL = "AIREL"
+          var airtel_thirdParty_number = prompt( operator_AIRTEL + " - Enter Recipient Number (12 digits): ");
+          if (airtel_thirdParty_number.length != 12){
+            alert(`Invalid Number Format \n 1. Number must be 12 digits \n\n Okay to return to Main Menu`);
+            airtimeOther()
+          }else{
+            var airtel_amountTo_thirdParty = Number(prompt("Enter Amount: "));
+            if( airtel_amountTo_thirdParty < 100){
+              alert("Minimum Recharge to third party is #100")
+              airtimeOther();
+            }
+            // var confirm_thirdParty_number = confirm(thirdParty_number + "")
+            let confirm_airtel_thirdParty_Tranzaction = confirm(
+            "Confirm the Transaction below: \n" + 
+            "Transfer #" + airtel_amountTo_thirdParty + "\nTo " + 
+            airtel_thirdParty_number
+            )
+            if (confirm_airtel_thirdParty_Tranzaction == true)
+              {
+                tranzactProcessor(airtel_amountTo_thirdParty, airtel_thirdParty_number, tranzaction_type_other)
+            }
+            if (airtel_mountTo_thirdParty != airtel_confirm_thirdParty_Tranzaction){
+              prompt("Invalid Response!!!")
+              tiidelabService();
+            } 
+          }
+          // ETISALAT OPTION
+        }else if (airtimeToOtherResponse == 4){
+          const tranzaction_type_other = "Airtime - Other"
+          operator_ETISALAT = "ETISALAT"
+          var etisalat_thirdParty_number = prompt("etisalat - Enter Recipient Number (12 digits): ");
+          if (etisalat_thirdParty_number.length != 12){
+            alert(`Invalid Number Format \n 1. Number must be 12 digits \n\n Okay to return to Main Menu`);
+            airtimeOther()
+          }else{
+            var etisalat_amountTo_thirdParty = Number(prompt("Enter Amount: "));
+            if( etisalat_amountTo_thirdParty < 100){
+              alert("Minimum Recharge to third party is #100")
+              airtimeOther();
+            }
+            // var confirm_thirdParty_number = confirm(thirdParty_number + "")
+            let confirm_etisalat_thirdParty_Tranzaction = confirm(
+            "Confirm the Transaction below: \n" + 
+            "Transfer #" + etisalat_amountTo_thirdParty + "\nTo " + 
+            etisalat_thirdParty_number
+            )
+            if (confirm_etisalat_thirdParty_Tranzaction == true)
+            {
+              tranzactProcessor(etisalat_amountTo_thirdParty, etisalat_thirdParty_number, tranzaction_type_other)
+            }
+            if (etisalat_mountTo_thirdParty != etisalat_confirm_thirdParty_Tranzaction)
+            {
+              prompt("Invalid Response!!!")
+              tiidelabService();
+            } 
+          }
+        }
+
+      }
+      
+      // ^^^^^^^ Data Option ^^^^^^^
+      function dataService(){
+        const dataType = prompt(`Select Type \n
+        1. Self \n
+        2. Other `)
+        if (Number(dataType) == 1){
+          const registeredSelf_number = " MTN - 08036157444 ";
+          const pin = 0000;
+          const tranzaction_type = "Self"
+          var dataToSelf = prompt(
+            "Your Number is: "  + registeredSelf_number + "\n\n Popular Bundles \n 1. 500MB - 1 week - #300\n 2. 1GB - 1 week - #500 \n 3. 3.5GB - 1 Month - #700 \n 9. Select Plan")
+          if (dataToSelf == 1)
+          {
+            dataToSelf = "500MB"
+            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
+            if (authenticate != pin)
+            {
+              prompt("Invalid Pin")
+              tiidelabService()
+            }        
+            let confirm_dataToSelf = confirm(
+              "Confirm the Transaction below: \n" + 
+              "Transfer #" + dataToSelf + "\nTo " + 
+              registeredSelf_number
+              )
+              if (confirm_dataToSelf == true)
+              {
+                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
+              }
+              if (dataToSelf != confirm_dataToSelf)
+              {
+                prompt("Invalid Response!!!")
+                tiidelabService()
+              }
+            tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
+          }else if (dataToSelf == 2){
+            const registeredSelf_number = " MTN - 08036157444 ";
+            const pin = 0000;
+            const tranzaction_type = "Self"
+            dataToSelf = "1GB"
+            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
+            if (authenticate != pin)
+            {
+              prompt("Invalid Pin")
+              tiidelabService()
+            }        
+            let confirm_dataToSelf = confirm(
+              "Confirm the Transaction below: \n" + 
+              "Transfer #" + dataToSelf + "\nTo " + 
+              registeredSelf_number
+              )
+              if (confirm_dataToSelf == true)
+              {
+                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
+              }
+              if (dataToSelf != confirm_amountToSelf)
+              {
+                prompt("Invalid Response!!!")
+                tiidelabService()
+              }
+          }else if (dataToSelf == 3){
+            dataToSelf = "3.5GB"
+            const registeredSelf_number = " MTN - 08036157444 ";
+            const pin = 0000;
+            const tranzaction_type = "Self"
+            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
+            if (authenticate != pin)
+            {
+              prompt("Invalid Pin")
+              tiidelabService()
+            }        
+            let confirm_dataToSelf = confirm(
+              "Confirm the Transaction below: \n" + 
+              "Transfer #" + dataToSelf + "\nTo " + 
+              registeredSelf_number
+              )
+              if (confirm_dataToSelf == true)
+              {
+                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
+              }
+              if (dataToSelf != confirm_dataToSelf)
+              {
+                prompt("Invalid Response!!!")
+                tiidelabService()
+              }
+          }else if (dataToSelf == 9){
+            prompt(`Service not available\n
+            1. Daily Plan\n
+            2. Weekly Plan\n
+            3. Monthly Plan\n
+            4. Night Plan\n
+            5. TIIDELab Plan\n
+            9. Main Menu`)
+            dataToSelf = "Service Not Available"
+            const registeredSelf_number = " MTN - 08036157444 ";
+            const pin = 0000;
+            const tranzaction_type = "Self"
+            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
+            if (authenticate != pin)
+            {
+              prompt("Invalid Pin")
+              tiidelabService()
+            }        
+            let confirm_dataToSelf = confirm(
+              "Confirm the Transaction below: \n" + 
+              "Transfer #" + dataToSelf + "\nTo " + 
+              registeredSelf_number
+              )
+              if (confirm_dataToSelf == true)
+              {
+                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
+              }
+              if (dataToSelf != confirm_dataToSelf)
+              {
+                prompt("Invalid Response!!!")
+                tiidelabService()
+              }
+          }
+          // THIRD PARTY DATA OPTION
+        }else if(dataType == 2){
+          
+          //END OF THIRD PARTY OPTION
+        }
+  
+      // Invoking The Main Menu
+     customerService();
+    } 
 
   </script>
+
+    <button onclick="tiidelabService()">Menu</button>
 </body>
 </html>
