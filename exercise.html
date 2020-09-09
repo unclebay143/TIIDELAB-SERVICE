@@ -333,8 +333,68 @@
               }
           }
           // THIRD PARTY DATA OPTION
-        }else if(dataType == 2){
-          
+        }else if(dataType == 2){    
+          let dataToOtherResponse = prompt(`Choose Network \n
+        1. MTN \n
+        2. Glo \n
+        3. Airtel \n
+        4. Etisalat`);
+          var beneficiary_number = prompt("Enter Beneficiary Number: ")
+            const pin = 0000;
+            const tranzaction_type = "Third"
+            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
+            if (authenticate != pin)
+            {
+              prompt("Invalid Pin")
+              tiidelabService()
+            }        
+            let confirm_dataToOther = confirm(
+              "Confirm the Transaction below: \n" + 
+              "Transfer #" + dataToOther + "\nTo " + 
+              beneficiary_number
+              )
+              if (confirm_dataToOther == true)
+              {
+                tranzactProcessor(dataToOther, beneficiary_number, tranzaction_type)
+              }
+              if (dataToOther != confirm_dataToOther)
+              {
+                prompt("Invalid Response!!!")
+                tiidelabService()
+              }
+          }else if (dataToSelf == 9){
+            prompt(`Service not available\n
+            1. Daily Plan\n
+            2. Weekly Plan\n
+            3. Monthly Plan\n
+            4. Night Plan\n
+            5. TIIDELab Plan\n
+            9. Main Menu`)
+            dataToSelf = "Service Not Available"
+            const registeredSelf_number = " MTN - 08036157444 ";
+            const pin = 0000;
+            const tranzaction_type = "Self"
+            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
+            if (authenticate != pin)
+            {
+              prompt("Invalid Pin")
+              tiidelabService()
+            }        
+            let confirm_dataToSelf = confirm(
+              "Confirm the Transaction below: \n" + 
+              "Transfer #" + dataToSelf + "\nTo " + 
+              registeredSelf_number
+              )
+              if (confirm_dataToSelf == true)
+              {
+                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
+              }
+              if (dataToSelf != confirm_dataToSelf)
+              {
+                prompt("Invalid Response!!!")
+                tiidelabService()
+              }
+          }
           //END OF THIRD PARTY OPTION
         }
   
