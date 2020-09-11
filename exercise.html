@@ -6,6 +6,138 @@
   <title>Document</title>
 </head>
 <body>
+  <style>
+    /* **{
+      margin:0;
+      padding:0;
+      box-sizing: border-box;
+    } */
+    body{
+      background: #ffeeee;
+    }
+    .main-con{
+      background: #fff3;
+      display: flex;
+      height: 90vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 1024px;
+    }
+    .btn{
+      width: 60%;
+      position: relative;
+      display: block;
+      margin: 0 auto;
+      left: 300px;
+    }
+    button{
+      background-color: rgb(94, 83, 83);
+      color: #ffeeee;
+      padding: 15px;
+      font-size: 19px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      border-radius: 12px;
+    }
+    .con-wrapper{
+      height: 100vh;
+      width: 40%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      background: #333;
+      color: white;
+    }
+    .con-wrapper h4{
+      font-size: 30px;
+      font-family: roboto;
+      background-image: linear-gradient(120deg, red, green);
+      padding: 12px;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-left: 2px solid rgb(240, 171, 171);
+    }
+    .con-wrapper p{
+      color: gold;
+      margin: 12px;
+    }
+    .con-wrapper ul li{
+      font-size: 18px;
+      line-height: 30px;
+    }
+    .offers{
+      display: flex;
+    }
+    @media(max-width: 800px){
+      .main-con{
+        width: 100px;
+      }
+      .con-wrapper{
+        width: 100vw;
+        overflow: hidden;
+      }
+      .btn{
+        left: 130px;
+        bottom: 25%;
+        margin: 25px;
+      }
+    }
+    @media(max-width: px){
+       .btn{
+        left: 300px;
+        bottom: 25%;
+        margin: 25px;
+      }
+    }
+  </style>
+  <div class="main-con">
+    <div class="con-wrapper">
+      <h4>TIIDELab NETWORK SERVICE</h4>
+      <p>List of available Network Bundle Offers</p>
+      <div class="offers">
+        <ul>
+          <h3 style="color: rgb(212, 14, 14);">Airtel</h3>
+          <li># 100 - 100MB</li>
+          <li># 200 - 200MB</li>
+          <li># 300 - 500MB</li>
+          <li># 500 - 750MB</li>
+          <li># 1000 - 2.5GB</li>
+          <li># 10000 - 40GB</li>
+        </ul>
+        <ul>
+          <h3 style="color: yellow;">MTN</h3>
+          <li># 100 - 100MB</li>
+          <li># 200 - 200MB</li>
+          <li># 300 - 500MB</li>
+          <li># 500 - 750MB</li>
+          <li># 1000 - 2.5GB</li>
+          <li># 10000 - 40GB</li>
+        </ul>
+        <ul>
+          <h3 style="color: green; font-weight: 700;">Glo</h3>
+          <li># 100 - 100MB</li>
+          <li># 200 - 200MB</li>
+          <li># 300 - 500MB</li>
+          <li># 500 - 750MB</li>
+          <li># 1000 - 2.5GB</li>
+          <li># 10000 - 40GB</li>
+        </ul>
+    </div>
+    <div class="offers">
+      <ul>
+        <h3 style="color: greenyellow; word-spacing: 6px;">Etisalat is currently unavailable</h3>
+      </ul>
+    </div>
+
+    </div>
+    <div class="btn">
+      <button onclick="tiidelabService()">Menu</button>
+    </div>
+  </div>
+  
   <script>
     function tiidelabService()
     {
@@ -214,196 +346,246 @@
 
       }
       
+      // DATA To registered Number
+      function dataSelf()
+      {
+        const registeredSelf_number = " MTN - 08036157444 ";
+        const pin = 0000;
+        const tranzaction_type = "Self"
+        var dataToSelf = prompt("Your Number is " + registeredSelf_number + ". \n\n Enter data")
+        if (dataToSelf < 100)
+        {
+          alert("Minimum Recharge is #100")
+          dataSelf()
+        }else{
+          let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
+        if (authenticate != pin)
+        {
+          prompt("Invalid Pin")
+          tiidelabService()
+        }        
+        let confirm_dataToSelf = confirm(
+          "Confirm the Transaction below: \n" + 
+          "Transfer #" + dataToSelf + "\nTo " + 
+          registeredSelf_number
+          )
+          if (confirm_dataToSelf == true)
+          {
+            tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
+          }
+          if (dataToSelf != confirm_dataToSelf)
+          {
+            prompt("Invalid Response!!!")
+            tiidelabService()
+          }
+        }
+        
+        
+      }
+     
+      // ^^^^^^^ data To Other ^^^^^^^
+      function dataOther(){
+        let dataToOtherResponse = prompt(`Choose Network \n
+        1. MTN \n
+        2. Glo \n
+        3. Airtel \n
+        4. Etisalat`);
+
+        // OPERATOR OPTION
+        // MTN OPTION
+        if (dataToOtherResponse == 1){
+          const tranzaction_type_other = "data - Other"
+          operator_MTN = "MTN"
+          var mtn_thirdParty_number = prompt( operator_MTN + " - Enter Recipient Number (12 digits): ");
+          if (mtn_thirdParty_number.length != 12){
+            alert(`Invalid Number Format \n 1. Number must be 12 digits \n\n Okay to return to Main Menu`)
+            dataOther()
+          }else{
+            var mtn_dataTo_thirdParty = prompt("Enter data: ")
+            if( mtn_dataTo_thirdParty < 100){
+              alert("Minimum Recharge to third party is #100")
+              dataOther()
+            }
+            // var confirm_thirdParty_number = confirm(thirdParty_number + "")
+            let confirm_mtn_thirdParty_Tranzaction = confirm(
+          "Confirm the Transaction below: \n" + 
+          "Transfer #" + mtn_dataTo_thirdParty + "\nTo " + 
+          mtn_thirdParty_number
+          )
+          if (confirm_mtn_thirdParty_Tranzaction == true)
+          {
+            tranzactProcessor(mtn_dataTo_thirdParty, mtn_thirdParty_number, tranzaction_type_other)
+          }
+          if (mtn_mountTo_thirdParty != mtn_confirm_thirdParty_Tranzaction)
+          {
+            prompt("Invalid Response!!!")
+            tiidelabService()
+          } 
+          }
+        // GLO Option
+        }else if (dataToOtherResponse == 2){
+          const tranzaction_type_other = "data - Other"
+          operator_GLO = "GLO"
+          var glo_thirdParty_number = prompt(operator_GLO + " - Enter Recipient Number (12 digits): ");
+          if (glo_thirdParty_number.length != 12){
+            alert(`Invalid Number Format \n 1. Number must be 12 digits \n\n Okay to return to Main Menu`);
+            dataOther()
+          }else{
+            var mtn_dataTo_thirdParty = Number(prompt("Enter data: "));
+            if( mtn_dataTo_thirdParty < 100){
+              alert("Minimum Recharge to third party is #100")
+              dataOther();
+            }
+            // var confirm_thirdParty_number = confirm(thirdParty_number + "")
+            let confirm_mtn_thirdParty_Tranzaction = confirm(
+            "Confirm the Transaction below: \n" + 
+            "Transfer #" + mtn_dataTo_thirdParty + "\nTo " + 
+            glo_thirdParty_number
+            )
+           if (confirm_mtn_thirdParty_Tranzaction == true)
+            {
+              tranzactProcessor(mtn_dataTo_thirdParty, glo_thirdParty_number, tranzaction_type_other)
+            }
+            if (mtn_mountTo_thirdParty != mtn_confirm_thirdParty_Tranzaction)
+            {
+              prompt("Invalid Response!!!")
+              tiidelabService();
+            } 
+         }
+        //  AIRTEL OPTION
+        }else if (dataToOtherResponse == 3){
+          const tranzaction_type_other = "data - Other"
+          operator_AIRTEL = "AIREL"
+          var airtel_thirdParty_number = prompt( operator_AIRTEL + " - Enter Recipient Number (12 digits): ");
+          if (airtel_thirdParty_number.length != 12){
+            alert(`Invalid Number Format \n 1. Number must be 12 digits \n\n Okay to return to Main Menu`);
+            dataOther()
+          }else{
+            var airtel_dataTo_thirdParty = prompt("Enter data: ");
+            if( airtel_dataTo_thirdParty < 100){
+              alert("Minimum Data Recharge to third party is #100")
+              dataOther();
+            }
+            // var confirm_thirdParty_number = confirm(thirdParty_number + "")
+            let confirm_airtel_thirdParty_Tranzaction = confirm(
+            "Confirm the Transaction below: \n" + 
+            "Transfer #" + airtel_dataTo_thirdParty + "\nTo " + 
+            airtel_thirdParty_number
+            )
+            if (confirm_airtel_thirdParty_Tranzaction == true)
+              {
+                tranzactProcessor(airtel_dataTo_thirdParty, airtel_thirdParty_number, tranzaction_type_other)
+            }
+            if (airtel_mountTo_thirdParty != airtel_confirm_thirdParty_Tranzaction){
+              prompt("Invalid Response!!!")
+              tiidelabService();
+            } 
+          }
+          // ETISALAT OPTION
+        }else if (dataToOtherResponse == 4){
+          const tranzaction_type_other = "data - Other"
+          operator_ETISALAT = "ETISALAT"
+          var etisalat_thirdParty_number = prompt("etisalat - Enter Recipient Number (12 digits): ");
+          if (etisalat_thirdParty_number.length != 12){
+            alert(`Invalid Number Format \n 1. Number must be 12 digits \n\n Okay to return to Main Menu`);
+            dataOther()
+          }else{
+            var etisalat_dataTo_thirdParty = Number(prompt("Enter data: "));
+            if( etisalat_dataTo_thirdParty < 100){
+              alert("Minimum Recharge to third party is #100")
+              dataOther();
+            }
+            // var confirm_thirdParty_number = confirm(thirdParty_number + "")
+            let confirm_etisalat_thirdParty_Tranzaction = confirm(
+            "Confirm the Transaction below: \n" + 
+            "Transfer #" + etisalat_dataTo_thirdParty + "\nTo " + 
+            etisalat_thirdParty_number
+            )
+            if (confirm_etisalat_thirdParty_Tranzaction == true)
+            {
+              tranzactProcessor(etisalat_dataTo_thirdParty, etisalat_thirdParty_number, tranzaction_type_other)
+            }
+            if (etisalat_mountTo_thirdParty != etisalat_confirm_thirdParty_Tranzaction)
+            {
+              prompt("Invalid Response!!!")
+              tiidelabService();
+            } 
+          }
+        }
+
+      }
       // ^^^^^^^ Data Option ^^^^^^^
       function dataService(){
         const dataType = prompt(`Select Type \n
         1. Self \n
         2. Other `)
-        if (Number(dataType) == 1){
-          const registeredSelf_number = " MTN - 08036157444 ";
-          const pin = 0000;
-          const tranzaction_type = "Self"
-          var dataToSelf = prompt(
-            "Your Number is: "  + registeredSelf_number + "\n\n Popular Bundles \n 1. 500MB - 1 week - #300\n 2. 1GB - 1 week - #500 \n 3. 3.5GB - 1 Month - #700 \n 9. Select Plan")
-          if (dataToSelf == 1)
-          {
-            dataToSelf = "500MB"
-            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
-            if (authenticate != pin)
-            {
-              prompt("Invalid Pin")
-              tiidelabService()
-            }        
-            let confirm_dataToSelf = confirm(
-              "Confirm the Transaction below: \n" + 
-              "Transfer #" + dataToSelf + "\nTo " + 
-              registeredSelf_number
-              )
-              if (confirm_dataToSelf == true)
-              {
-                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
-              }
-              if (dataToSelf != confirm_dataToSelf)
-              {
-                prompt("Invalid Response!!!")
-                tiidelabService()
-              }
-            tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
-          }else if (dataToSelf == 2){
-            const registeredSelf_number = " MTN - 08036157444 ";
-            const pin = 0000;
-            const tranzaction_type = "Self"
-            dataToSelf = "1GB"
-            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
-            if (authenticate != pin)
-            {
-              prompt("Invalid Pin")
-              tiidelabService()
-            }        
-            let confirm_dataToSelf = confirm(
-              "Confirm the Transaction below: \n" + 
-              "Transfer #" + dataToSelf + "\nTo " + 
-              registeredSelf_number
-              )
-              if (confirm_dataToSelf == true)
-              {
-                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
-              }
-              if (dataToSelf != confirm_amountToSelf)
-              {
-                prompt("Invalid Response!!!")
-                tiidelabService()
-              }
-          }else if (dataToSelf == 3){
-            dataToSelf = "3.5GB"
-            const registeredSelf_number = " MTN - 08036157444 ";
-            const pin = 0000;
-            const tranzaction_type = "Self"
-            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
-            if (authenticate != pin)
-            {
-              prompt("Invalid Pin")
-              tiidelabService()
-            }        
-            let confirm_dataToSelf = confirm(
-              "Confirm the Transaction below: \n" + 
-              "Transfer #" + dataToSelf + "\nTo " + 
-              registeredSelf_number
-              )
-              if (confirm_dataToSelf == true)
-              {
-                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
-              }
-              if (dataToSelf != confirm_dataToSelf)
-              {
-                prompt("Invalid Response!!!")
-                tiidelabService()
-              }
-          }else if (dataToSelf == 9){
-            prompt(`Service not available\n
-            1. Daily Plan\n
-            2. Weekly Plan\n
-            3. Monthly Plan\n
-            4. Night Plan\n
-            5. TIIDELab Plan\n
-            9. Main Menu`)
-            dataToSelf = "Service Not Available"
-            const registeredSelf_number = " MTN - 08036157444 ";
-            const pin = 0000;
-            const tranzaction_type = "Self"
-            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
-            if (authenticate != pin)
-            {
-              prompt("Invalid Pin")
-              tiidelabService()
-            }        
-            let confirm_dataToSelf = confirm(
-              "Confirm the Transaction below: \n" + 
-              "Transfer #" + dataToSelf + "\nTo " + 
-              registeredSelf_number
-              )
-              if (confirm_dataToSelf == true)
-              {
-                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
-              }
-              if (dataToSelf != confirm_dataToSelf)
-              {
-                prompt("Invalid Response!!!")
-                tiidelabService()
-              }
-          }
-          // THIRD PARTY DATA OPTION
-        }else if(dataType == 2){    
-          let dataToOtherResponse = prompt(`Choose Network \n
-        1. MTN \n
-        2. Glo \n
-        3. Airtel \n
-        4. Etisalat`);
-          var beneficiary_number = prompt("Enter Beneficiary Number: ")
-            const pin = 0000;
-            const tranzaction_type = "Third"
-            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
-            if (authenticate != pin)
-            {
-              prompt("Invalid Pin")
-              tiidelabService()
-            }        
-            let confirm_dataToOther = confirm(
-              "Confirm the Transaction below: \n" + 
-              "Transfer #" + dataToOther + "\nTo " + 
-              beneficiary_number
-              )
-              if (confirm_dataToOther == true)
-              {
-                tranzactProcessor(dataToOther, beneficiary_number, tranzaction_type)
-              }
-              if (dataToOther != confirm_dataToOther)
-              {
-                prompt("Invalid Response!!!")
-                tiidelabService()
-              }
-          }else if (dataToSelf == 9){
-            prompt(`Service not available\n
-            1. Daily Plan\n
-            2. Weekly Plan\n
-            3. Monthly Plan\n
-            4. Night Plan\n
-            5. TIIDELab Plan\n
-            9. Main Menu`)
-            dataToSelf = "Service Not Available"
-            const registeredSelf_number = " MTN - 08036157444 ";
-            const pin = 0000;
-            const tranzaction_type = "Self"
-            let authenticate = parseInt(prompt("Proceed with your 4 digit pin"));
-            if (authenticate != pin)
-            {
-              prompt("Invalid Pin")
-              tiidelabService()
-            }        
-            let confirm_dataToSelf = confirm(
-              "Confirm the Transaction below: \n" + 
-              "Transfer #" + dataToSelf + "\nTo " + 
-              registeredSelf_number
-              )
-              if (confirm_dataToSelf == true)
-              {
-                tranzactProcessor(dataToSelf, registeredSelf_number, tranzaction_type)
-              }
-              if (dataToSelf != confirm_dataToSelf)
-              {
-                prompt("Invalid Response!!!")
-                tiidelabService()
-              }
-          }
-          //END OF THIRD PARTY OPTION
+        if (Number(dataType) == 1)
+        {
+          dataSelf()
         }
-  
+        else if (dataType == 2)
+        {
+          dataOther()
+        }
+      }
+
+      // TRANSFER OPTION
+      function transferService()
+    {
+        transferMenu = prompt(
+        `
+        1. Airtime
+        2. Data
+        3. Bank
+        `
+        )
+        if (Number(transferMenu) == 1)
+        {
+            airtimeType = prompt(
+              `Airtime - Please Select Type
+                1. Self
+                2. Other
+              `
+              )
+            if (Number(airtimeType) == 1)
+            {
+                airtimeSelf()
+            }else if(Number(airtimeType) == 2)
+            {
+                airtimeOther()
+            }else{
+              alert("Can not process that at the moment")
+              transferService()
+            }
+        }else if (Number(transferMenu) == 2)
+        {
+            dataService()
+        }else if(Number(transferMenu) == 3)
+        {
+          bankType = prompt(`
+          Select Bank:
+          1. Gtbank
+          2. Polaris
+          3. First Bank
+          4. Diamond 
+          5. Eco
+          6. Zenith 
+          `)
+          bankAccount = prompt("Enter Beneficiary Account: ")
+          alert(`Serious Issue... 
+
+          Account Authentication Failed for ${bankAccount}....
+          
+          Our team is working to get this fixed!!!`)
+        }
+    }
+      
       // Invoking The Main Menu
      customerService();
     } 
 
+    
   </script>
-
-    <button onclick="tiidelabService()">Menu</button>
+    
 </body>
 </html>
