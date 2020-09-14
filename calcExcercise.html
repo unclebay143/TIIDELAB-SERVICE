@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIIDELab Calculator Exercise</title>
+</head>
+<body>
+  <script>
+    //  Program that perform math basic operation
+
+    // Program start- Function checks operator type
+    function tiidelabCalc(operator , i , p){
+      if (operator == 1){
+        // 1 for addition operator
+        add(i, p)
+      } else if (operator == 2){
+        // 3 for subtraction operator
+        sub(i, p)
+      } else if (operator == 3){
+        // 3 for division operator
+        div(i, p)
+      } else if (operator == 4){
+        // 4 for multiplication operator
+        mult(i, p)
+      }else{
+        alert("I do not understand that")
+      }
+      // Addition Operator
+      function add(a, b){
+        let add_answer = a + b;
+        alert(`${a} + ${b} = ${add_answer}`)
+      }
+      // Subtraction Operator
+      function sub(a, b){
+        let add_answer = a - b;
+        alert(`${a} - ${b} = ${add_answer}`)
+      }
+      // Division Operator
+      function div(a, b){
+        let add_answer = a / b;
+        alert(`${a} / ${b} = ${add_answer}`)
+      }
+      // Multiplication Operator
+      function mult(a, b){
+        let add_answer = a * b;
+        alert(`${a} x ${b} = ${add_answer}`)
+      }
+    }
+    // Operator Selector
+    operator = Number(prompt(`TIIDELab Calculator
+    Select An Operation
+    1. Add
+    2. Sub
+    3. Div
+    4. Mult
+    `));
+    // Number input
+    number_1 = Number(prompt("Enter First Number"))
+    number_2 = Number(prompt("Enter Second Number"))
+    // Revoke Function
+    tiidelabCalc(operator, number_1, number_2);
+  </script>
+</body>
+</html>
